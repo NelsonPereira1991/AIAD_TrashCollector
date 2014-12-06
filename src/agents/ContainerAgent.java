@@ -72,6 +72,10 @@ public class ContainerAgent {
 		}
 		
 	}
+
+	public int getCurrentWasteQuantity() {
+		return currentWasteQuantity;
+	}
 	
 	
 	//TODO actualizar variavel empty no plano pickUpWaste

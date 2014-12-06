@@ -1,26 +1,24 @@
 package plans;
 
 import agents.CollectorAgent;
-import agents.ContainerAgent;
 import jadex.bdiv3.annotation.Plan;
 import jadex.bdiv3.annotation.PlanBody;
 
 @Plan
-public class DepositWastePlan {
+public class WanderPlan {
 	
-	//private GarbageDepotAgent gdepot;
 	private CollectorAgent collector;
 	
-	public DepositWastePlan()
+	public WanderPlan()
 	{
 		
 	}
-	
-	
-	@PlanBody
-	public void DepositWasteBody()
-	{
-		collector.setCurrentWaste(0);
-	}
 
+	@PlanBody
+	public void WanderPlanBody()
+	{
+		
+		//TODO collector.move()
+		
+	}
 }
