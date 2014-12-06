@@ -1,0 +1,14 @@
+#Collectors
+type/x/y/capacidade_maxima
+#Containers
+type/x/y/capacidade_maxima
+#burner
+x/y
+
+
+
+Types:
+1-papel
+2-vidros
+3-embalagens
+4-domesticos

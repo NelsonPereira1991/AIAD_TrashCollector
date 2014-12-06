@@ -1,0 +1,8 @@
+#Map
+size width/height
+xi/yi/xf/yf/sentidos
+
+
+sentidos
+0 - 1 sentido
+1 - 2 sentidos
