@@ -1,5 +1,7 @@
 package map;
 
+import objects.GarbageObject;
+
 public class Location {
 	
 	public int x,y;
@@ -10,10 +12,10 @@ public class Location {
 	}
 	
 	public void movement(){
-		Object garbageCollector;
-		AppInterface appInt = garbageCollector.getEntity().getAppInt();
+		GarbageObject garbageObject = null;
+		AppInterface appInt = garbageObject.getEntity().getAppInt();
 		if(appInt==null){
-			if(garbageCollector.defined){
+			if(garbageObject.defined){
 				System.out.println("World isn't defined");
 			}
 			x+=(Math.round(Math.random()));

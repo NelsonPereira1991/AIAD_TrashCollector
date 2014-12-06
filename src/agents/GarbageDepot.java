@@ -1,4 +1,4 @@
-package objects;
+package agents;
 
 public class GarbageDepot {
 	private int x;
