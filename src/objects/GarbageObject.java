@@ -15,10 +15,10 @@ public class GarbageObject {
 	private AppInterface appInt = null;
 	
 
-	private ArrayList<CollectorAgent> collector_agents;
-	private ArrayList<ContainerAgent> container_agents;
+	private ArrayList<CollectorAgentBDI> collector_agents;
+	private ArrayList<ContainerAgentBDI> container_agents;
 	
-	//TODO AQUI Provavelmente merda
+	//TODO AQUI Provavelmente erros
 	private ArrayList<GarbageDepot> depot_agents;
 	
 	//private float speed = SPEED.Normal.speed;

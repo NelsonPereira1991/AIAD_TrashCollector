@@ -1,3 +1,4 @@
+/*
 package plans;
 
 
@@ -31,3 +32,4 @@ public class CreateWastePlan {
 	}
 
 }
+*/

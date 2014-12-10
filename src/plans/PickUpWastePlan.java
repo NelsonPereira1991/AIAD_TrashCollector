@@ -2,8 +2,8 @@ package plans;
 
 import jadex.bdiv3.annotation.Plan;
 import jadex.bdiv3.annotation.PlanBody;
-import agents.ContainerAgent;
-import agents.CollectorAgent;
+import agents.ContainerAgentBDI;
+import agents.CollectorAgentBDI;
 
 @Plan
 public class PickUpWastePlan {
@@ -11,8 +11,8 @@ public class PickUpWastePlan {
 	private int amountToPickUp;
 	private int amountInContainer;
 	private int collectorFreeSpace;
-	private ContainerAgent container;
-	private CollectorAgent collector;
+	private ContainerAgentBDI container;
+	private CollectorAgentBDI collector;
 	
 	public PickUpWastePlan()
 	{

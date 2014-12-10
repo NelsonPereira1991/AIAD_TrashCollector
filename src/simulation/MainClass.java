@@ -6,10 +6,7 @@ import objects.*;
 
 public class MainClass {
 
-	private CollectorAgent[] collectors;
-	private ContainerAgent[] containers;
-	private GarbageDepot[] depots;
-	
-	
-	
+	private CollectorAgentBDI[] collectors;
+	private ContainerAgentBDI[] containers;
+	private GarbageDepot[] depots;	
 }
