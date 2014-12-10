@@ -148,7 +148,11 @@ public class ContainerAgentBDI {
 	public int getCurrentWasteQuantity() {
 		return currentWasteQuantity;
 	}
-	
+
+
+	public String getWasteType() {
+		return wasteType;
+	}
 	
 	
 	//TODO actualizar variavel empty no plano pickUpWaste

@@ -21,6 +21,8 @@ import jadex.micro.annotation.AgentCreated;
 import jadex.micro.annotation.Description;
 import plans.PickUpWastePlan;
 
+import objects.GarbageObject;
+
 
 @Agent
 @Description("Collector agent")
@@ -81,11 +83,10 @@ public class CollectorAgentBDI {
 	public void body()
 	{
 		try {
-			FindWasteGoal goal = (FindWasteGoal) agent.dispatchTopLevelGoal(new FindWasteGoal()).get();
+			int freeSpaceCollector = capacity - currentWasteQuantity;
+			FindWasteGoal goal = (FindWasteGoal) agent.dispatchTopLevelGoal(new FindWasteGoal(location, freeSpaceCollector)).get();
 			System.out.println("Found waste from proper waste type!!");
-			//TODO adicionar quantidade de waste levantada ao collector e retirar esse waste do container
-			//setCurrentWaste(quantidadeLevantada);
-			//TODO setContainerWaste blablabla
+			System.out.println("Waste picked Up!!");
 			System.out.println("Good bye!");
 		} catch (PlanFailureException e) {
 			System.out.println("Waste not found, still looking...");
@@ -108,36 +109,84 @@ public class CollectorAgentBDI {
 	@Plan(trigger=@Trigger(goals=FindWasteGoal.class))
 	protected void findWaste(FindWasteGoal goal){
 		
-		/*
-		if ()
+		Location collectorLocation = goal.getLocation();
+		int freeSpaceCollector = goal.getFreeSpaceCollector();
+		ContainerAgentBDI container = objects.GarbageObject.getContainerByLocation(collectorLocation);
+		int containerWasteAmount;
+		
+		if (container != null) 
 		{
-			
-		}
+			containerWasteAmount = container.getCurrentWasteQuantity();
+			if (freeSpaceCollector > 0 && containerWasteAmount > 0)
+			{
+				if(container.getWasteType() == getWasteType())
+				{
+					int wasteInContainer = container.getCurrentWasteQuantity();
+					int amountToPick;
+					int newAmountContainer;
+					
+					if(freeSpaceCollector <= wasteInContainer)
+					{
+						//quando o collector não tem espaco suficiente para recolher o lixo todo
+						//recolhe o espaço livre todo que tem
+						amountToPick = freeSpaceCollector;
+						
+						//no container fica o restante
+						newAmountContainer = wasteInContainer - amountToPick;
+						
+					}
+					else
+					{
+						//quando o collector tem espaço para recolher o lixo todo do container
+						//a quantidade a recolher é tudo o que está no container
+						amountToPick = wasteInContainer;
+						//no container fica então zero de lixo
+						newAmountContainer = 0;
+					}
+					
+					setCurrentWaste(amountToPick);
+					container.setCurrentWaste(newAmountContainer);
+					
+					
+				}
+				else
+				{
+					System.out.println("Container and collector are of different waste types!!");
+					throw new PlanFailureException();
+				}
+			}
+			else
+			{
+				System.out.println("Collector does not have free space or container is empty!!");
+				throw new PlanFailureException();
+			}
+		} 
 		else
 		{
+			System.out.println("Not yet at a container location!!");
 			throw new PlanFailureException();
 		}
-		*/
+		
+		
+		
 	}
 
 	
 	@Plan(trigger=@Trigger(goals=GoToDepotGoal.class))
 	protected void GoToDepot(GoToDepotGoal goal){
-		//TODO
-		/*
-		if(goal.getLocation() in DepotLocations[])
-		{
+		
+		Location collectorLocation = goal.getLocation();
+		GarbageDepot depot = objects.GarbageObject.getDepotByLocation(collectorLocation);
+		
+		if (depot != null) {
 			System.out.println("Arrived at depot");
-			//A location sera entao a de um depot
-			GarbageDepot depot = getDepotByLocation(location);
-			depot.BurnWaste();//para efeitos de estatistica, ou seja incrementar o numero de vezes que o depot foi usado
+			int amountToBurn = getCurrentWasteQuantity();
+			depot.BurnWaste(amountToBurn);//para efeitos de estatistica, ou seja incrementar o numero de vezes que o depot foi usado
+		} else {
 			
-		}
-		else
-		{
 			throw new PlanFailureException();
+
 		}
-		*/
 		
 	}
 
@@ -155,14 +204,13 @@ public class CollectorAgentBDI {
 
 
 	public void setCurrentWaste(int waste) {
-		// TODO Auto-generated method stub
-		currentWasteQuantity = waste;
+		currentWasteQuantity += waste;
 		
 	}
-	
-	
-	
-	
+
+	public String getWasteType() {
+		return WasteType;
+	}
 	
 
 }
