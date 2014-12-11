@@ -1,13 +1,13 @@
 package plans;
 
-import agents.CollectorAgent;
+import agents.CollectorAgentBDI;
 import jadex.bdiv3.annotation.Plan;
 import jadex.bdiv3.annotation.PlanBody;
 
 @Plan
 public class WanderPlan {
 	
-	private CollectorAgent collector;
+	private CollectorAgentBDI collector;
 	
 	public WanderPlan()
 	{

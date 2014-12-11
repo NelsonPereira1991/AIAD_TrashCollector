@@ -1,7 +1,7 @@
 package plans;
 
-import agents.CollectorAgent;
-import agents.ContainerAgent;
+import agents.CollectorAgentBDI;
+import agents.ContainerAgentBDI;
 import jadex.bdiv3.annotation.Plan;
 import jadex.bdiv3.annotation.PlanBody;
 
@@ -9,7 +9,7 @@ import jadex.bdiv3.annotation.PlanBody;
 public class DepositWastePlan {
 	
 	//private GarbageDepotAgent gdepot;
-	private CollectorAgent collector;
+	private CollectorAgentBDI collector;
 	
 	public DepositWastePlan()
 	{
