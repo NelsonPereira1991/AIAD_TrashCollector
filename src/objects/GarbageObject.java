@@ -80,5 +80,33 @@ public class GarbageObject {
 		
 		return result;
 	}
+	
+	public boolean moveCollector(CollectorAgentBDI collector, String direction)
+	{
+		//Direction: up/down/left/right
+		boolean result = true;
+		switch (direction) {
+		case "up":
+			collector.location.y--;
+			break;
+		case "down":
+			collector.location.y++;
+			break;
+		case "left":
+			collector.location.x--;
+			break;
+		case "right":
+			collector.location.x++;
+			break;
+
+		default:
+			System.err.println("Unknown direction");
+			result = false;
+			break;
+		}
+		
+		return result;
+		
+	}
 
 }
