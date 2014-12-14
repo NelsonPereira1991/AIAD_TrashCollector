@@ -4,11 +4,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import objects.Collector;
+import objects.Container;
+import objects.GarbageDepot;
+import objects.GarbageObject;
+
+import org.bridj.cpp.com.COMRuntime.COINIT;
+
+import plans.DepositWastePlan;
+
 public class readFile {
 
 	
 	public static final char COMMENT = '#';
 	public static final char SIZE_MAP='S';
+	
+	public static objects.GarbageObject garbObject;
 	
 	public int x; //sizeX map
 	public int y; //sizeY map
@@ -45,7 +56,7 @@ public class readFile {
 		if (nextLine.length() == 0 || nextLine.toCharArray()[0] == COMMENT)
 			return false;
 	
-		int x,y;
+		int x = -1,y = -1;
 		String[] thisLine = nextLine.split(",");
 		System.out.println("Depots:");
 		try {
@@ -56,6 +67,9 @@ public class readFile {
 		} catch (NumberFormatException ex) {
 				System.out.println("Invalid road at line " + line + ".");
 		}
+		Location location = new Location(x, y);
+		GarbageDepot depot = new GarbageDepot(location);
+		garbObject.depots.add(depot);
 		return true;
 	}
 
@@ -79,7 +93,7 @@ public class readFile {
 	private boolean parseContainersLine(String nextLine, int line) {
 		if (nextLine.length() == 0 || nextLine.toCharArray()[0] == COMMENT)
 			return false;
-		int type, x, y, capacityMax;
+		int type = -1, x = -1, y = -1, capacityMax = 0;
 		String[] thisLine = nextLine.split("/");
 		String[] coord = thisLine[1].split(",");
 		
@@ -98,6 +112,28 @@ public class readFile {
 		} catch (NumberFormatException ex) {
 				System.out.println("Invalid road at line " + line + ".");
 		}
+		Location location = new Location(x, y);
+		String wasteType = null;
+		switch (type) {
+		case 1:
+			wasteType = "Papel";
+			break;
+		case 2:
+			wasteType = "Vidro";
+			break;
+		case 3:
+			wasteType = "Embalagem";
+			break;
+		case 4:
+			wasteType = "Domesticos";
+			break;
+
+		default:
+			break;
+		}
+		Container containerObject = new Container(location, wasteType, capacityMax);
+		garbObject.containers.add(containerObject);
+		
 		return true;
 		
 	}
@@ -123,7 +159,7 @@ public class readFile {
 		if (nextLine.length() == 0 || nextLine.toCharArray()[0] == COMMENT)
 			return false;
 		
-		int type, x, y, capacityMax;
+		int type = -1, x = -1, y = -1, capacityMax = -1;
 		String[] thisLine = nextLine.split("/");
 		String[] coord = thisLine[1].split(",");
 		
@@ -142,6 +178,28 @@ public class readFile {
 		} catch (NumberFormatException ex) {
 				System.out.println("Invalid road at line " + line + ".");
 		}
+		Location location = new Location(x, y);
+		String wasteType = null;
+		
+		switch (type) {
+		case 1:
+			wasteType = "Papel";
+			break;
+		case 2:
+			wasteType = "Vidro";
+			break;
+		case 3:
+			wasteType = "Embalagem";
+			break;
+		case 4:
+			wasteType = "Domesticos";
+			break;
+
+		default:
+			break;
+		}
+		Collector collector = new Collector(location, wasteType, capacityMax);
+		garbObject.collectors.add(collector);
 		return true;
 	}
 
@@ -209,7 +267,53 @@ public class readFile {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
+		garbObject = new GarbageObject();
 		readFile r = new readFile("map.txt", "collectors.txt", "containers.txt","depot.txt");
+		
+		//System.out.println("Debug de arrayLists");
+		/*
+		Location locationDepot = new Location(1, 1);
+		
+		GarbageDepot depot = new GarbageDepot(locationDepot);
+		
+		Location locationCollector = new Location(2, 2);
+		String wasteType = "Papel";
+		int capacity = 10;
+		Collector collectorObject = new Collector(locationCollector, wasteType, capacity);
+		
+		Location locationContainer = new Location(3, 3);
+		Container containerObject = new Container(locationContainer, wasteType, capacity);
+		
+		GarbageObject gObject = new GarbageObject(); 
+		
+		objects.GarbageObject.depots.add(depot);
+		objects.GarbageObject.containers.add(containerObject);
+		objects.GarbageObject.collectors.add(collectorObject);
+		*/
+		
+		/*
+		for (int i = 0; i < garbObject.collectors.size(); i++) {
+			System.out.println("Collector ID: " + garbObject.collectors.get(i).getCollectorID());
 		}
+		
+		for (int i = 0; i < garbObject.containers.size(); i++) {
+			System.out.println("containers ID: " + garbObject.containers.get(i).getContainerID());
+		}
+		
+		for (int i = 0; i < garbObject.depots.size(); i++) {
+			System.out.println("Depot ID: " + garbObject.depots.get(i).getDepotID());
+		}
+		*/
+		Location location = new Location(5, 3);
+		Container container = garbObject.getContainerByLocation(location);
+		
+		System.out.println("container id is:" + container.getContainerID());
+		
+		
+		
+	}
+	
+	
+		
 
 }

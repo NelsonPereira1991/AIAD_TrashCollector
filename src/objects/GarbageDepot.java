@@ -1,12 +1,15 @@
-package agents;
+package objects;
 
 import map.Location;
 
 public class GarbageDepot {
 	//private int x;
 	//private int y;
+	int depotID;
 	public Location location;
 	public int numWasteBurned;
+	
+	private static int count = 0;
 	//capacidade infinita
 	
 	/*
@@ -18,8 +21,10 @@ public class GarbageDepot {
 	}
 	*/
 	
-	public GarbageDepot(Location location, String WasteType)
+	public GarbageDepot(Location location)
 	{
+		this.depotID = count;
+		count++;
 		this.location = location;
 		this.numWasteBurned = 0;
 	}
@@ -28,4 +33,10 @@ public class GarbageDepot {
 		numWasteBurned += amountToBurn;
 		
 	}
+
+	public int getDepotID() {
+		return depotID;
+	}
+	
+	
 }

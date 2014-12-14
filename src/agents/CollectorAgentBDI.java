@@ -20,7 +20,7 @@ import jadex.micro.annotation.AgentBody;
 import jadex.micro.annotation.AgentCreated;
 import jadex.micro.annotation.Description;
 import plans.PickUpWastePlan;
-
+import objects.GarbageDepot;
 import objects.GarbageObject;
 
 
@@ -111,7 +111,7 @@ public class CollectorAgentBDI {
 		
 		Location collectorLocation = goal.getLocation();
 		int freeSpaceCollector = goal.getFreeSpaceCollector();
-		ContainerAgentBDI container = objects.GarbageObject.getContainerByLocation(collectorLocation);
+		ContainerAgentBDI container = null; //TODO= objects.GarbageObject.getContainerByLocation(collectorLocation);
 		int containerWasteAmount;
 		
 		if (container != null) 
