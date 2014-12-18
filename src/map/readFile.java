@@ -265,45 +265,12 @@ public class readFile {
 		
 	}		
 	
+	/*
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		garbObject = new GarbageObject();
 		readFile r = new readFile("map.txt", "collectors.txt", "containers.txt","depot.txt");
 		
-		//System.out.println("Debug de arrayLists");
-		/*
-		Location locationDepot = new Location(1, 1);
-		
-		GarbageDepot depot = new GarbageDepot(locationDepot);
-		
-		Location locationCollector = new Location(2, 2);
-		String wasteType = "Papel";
-		int capacity = 10;
-		Collector collectorObject = new Collector(locationCollector, wasteType, capacity);
-		
-		Location locationContainer = new Location(3, 3);
-		Container containerObject = new Container(locationContainer, wasteType, capacity);
-		
-		GarbageObject gObject = new GarbageObject(); 
-		
-		objects.GarbageObject.depots.add(depot);
-		objects.GarbageObject.containers.add(containerObject);
-		objects.GarbageObject.collectors.add(collectorObject);
-		*/
-		
-		/*
-		for (int i = 0; i < garbObject.collectors.size(); i++) {
-			System.out.println("Collector ID: " + garbObject.collectors.get(i).getCollectorID());
-		}
-		
-		for (int i = 0; i < garbObject.containers.size(); i++) {
-			System.out.println("containers ID: " + garbObject.containers.get(i).getContainerID());
-		}
-		
-		for (int i = 0; i < garbObject.depots.size(); i++) {
-			System.out.println("Depot ID: " + garbObject.depots.get(i).getDepotID());
-		}
-		*/
 		Location location = new Location(5, 3);
 		Container container = garbObject.getContainerByLocation(location);
 		
@@ -313,6 +280,7 @@ public class readFile {
 		
 	}
 	
+	*/
 	
 		
 
